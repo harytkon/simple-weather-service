@@ -7,10 +7,13 @@ import io.ktor.server.netty.*
 suspend fun main() {
     embeddedServer(Netty, port = 8080) {
         routing {
-            get("/") {
-                val client = WeatherServiceClient();
-                val weatherInfo = client.getCity("Helsinki")
-                call.respondText(weatherInfo)
+            route("/{city}") {
+                get {
+                    val city = call.parameters["city"].toString()
+                    val client = WeatherServiceClient()
+                    val weatherInfo = client.getCity(city)
+                    call.respondText(weatherInfo)
+                }
             }
         }
     }.start(wait = true)
