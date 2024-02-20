@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const WeatherSearchComponent = () => {
   const [inputValue, setInputValue] = useState('');
@@ -7,8 +6,12 @@ const WeatherSearchComponent = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/${inputValue}`);
-      setResponseData(response.data);
+      const response = await fetch(`http://localhost:8080/${inputValue}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      setResponseData(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
