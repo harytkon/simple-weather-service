@@ -21,8 +21,9 @@ const WeatherSearchComponent = () => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Enter your query"
+        data-testid="search-input"
       />
-      <button onClick={fetchData}>Search</button>
+      <button onClick={fetchData} data-testid="search-button">Search</button>
 
       {responseData && (
         <div>
