@@ -1,6 +1,6 @@
 # Simple weather service
 
-This is a web app a that fetch data from a open weather API via own backend.
+This is a web app (front and backend) which is used to get weather information from an open weather API.
 
 ## Frontend
 
