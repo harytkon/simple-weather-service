@@ -6,9 +6,9 @@ const WeatherSearchComponent = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/${inputValue}`);
+      const response = await fetch(`http://localhost:8080/weather/${inputValue}`);
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`HTTP error: ${response.status}`);
       }
       const data = await response.json();
       setResponseData(data);
@@ -31,7 +31,7 @@ const WeatherSearchComponent = () => {
       {responseData && (
         <div>
           <h2>Response:</h2>
-          <pre>{JSON.stringify(responseData, null, 2)}</pre>
+          <pre>{JSON.stringify(responseData)}</pre>
         </div>
       )}
     </div>
