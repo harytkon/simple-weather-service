@@ -14,6 +14,7 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:2.3.8")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.8")
     implementation("io.ktor:ktor-server-netty:2.3.8")
+    implementation("io.ktor:ktor-server-cors:2.3.8")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("io.mockk:mockk:1.13.9")
 }
