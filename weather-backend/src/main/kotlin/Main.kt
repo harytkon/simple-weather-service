@@ -20,15 +20,11 @@ suspend fun main() {
                     val httpClient = HttpClient(CIO)
                     val client = WeatherServiceClient(httpClient)
                     val city = call.parameters["city"].toString()
-                    if (city.isNotEmpty()) {
-                        try {
-                            val weatherInfo = client.getCity(city)
-                            call.respondText(weatherInfo, ContentType.Application.Json)
-                        } catch (e: Exception) {
-                            call.respondText("Error fetching weather information", ContentType.Text.Plain)
-                        }
-                    } else {
-                        call.respondText("City parameter is missing", ContentType.Text.Plain)
+                    try {
+                        val weatherInfo = client.getCity(city)
+                        call.respondText(weatherInfo, ContentType.Application.Json)
+                    } catch (e: Exception) {
+                        call.respondText("Error fetching weather information", ContentType.Text.Plain)
                     }
                 }
             }

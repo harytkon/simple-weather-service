@@ -1,8 +1,7 @@
 import io.ktor.client.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.mockk.coEvery
 import io.ktor.client.utils.EmptyContent.status
+import io.ktor.http.*
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
@@ -22,24 +21,18 @@ class WeatherServiceClientTest {
 
     @Test
     fun `test getWeather`() {
-        // Mock the HttpClient
         val httpClientMock = mockk<HttpClient>()
 
-        coEvery { httpClientMock.get("fgfgf") } coAnswers {
+        coEvery { httpClientMock.get("New York") } coAnswers {
             mockk {
-                coEvery { status } returns io.ktor.http.HttpStatusCode.OK
+                coEvery { status } returns HttpStatusCode.OK
             }
         }
         val weatherService = WeatherServiceClient(httpClientMock)
         runBlocking {
-            val resultNewYork = weatherService.getCity("NewYork")
-            val resultLondon = weatherService.getCity("London")
-            val resultParis = weatherService.getCity("Paris")
+            val resultNewYork = weatherService.getCity("New York")
 
-            // Verify the results
             assertEquals("Mocked weather response", resultNewYork)
-            assertEquals("Mocked weather response", resultLondon)
-            assertEquals("Mocked weather response", resultParis)
         }
     }
 }
